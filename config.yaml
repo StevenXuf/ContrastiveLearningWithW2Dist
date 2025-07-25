@@ -1,8 +1,12 @@
-tokenizer_name: 'sentence-transformers/all-mpnet-base-v2' #"bert-base-uncased"
-batch_size: 128
-embed_dim: 256
-lr: 1.0e-4
-init_temp: 0.07
-reg_weight: 0.01
-epochs: 50
+TOKENIZER_NAME: 'sentence-transformers/all-mpnet-base-v2' #"bert-base-uncased"
+BATCH_SIZE: 64
+IMAGE_SIZE: 224
+MEAN: [0.485, 0.456, 0.406]
+STD: [0.229, 0.224, 0.225]
+EMBED_DIM: 256
+LR: 1.0e-6 #-4
+INIT_TEMP: 0.07
+REG_WEIGHT: 0.01
+EPOCHS: 50
+METRIC: 'hell'
 

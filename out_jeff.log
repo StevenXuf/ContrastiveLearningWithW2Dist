@@ -1,0 +1,633 @@
+Batch size: train=128, val=1000, test=1000
+Using metric: jeff
+  0%|          | 0/100 [00:00<?, ?it/s]  1%|          | 1/100 [02:45<4:33:10, 165.56s/it]Last batch mean norm: 2.16 0.69 
+ variance norm: 17.44 16.20
+Learned temperature: 0.07016088259940846
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 1/100, Loss: 18.9067
+  2%|▏         | 2/100 [05:30<4:29:56, 165.27s/it]Last batch mean norm: 1.89 0.84 
+ variance norm: 17.33 16.25
+Learned temperature: 0.07020366626049464
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 2/100, Loss: 4.7400
+  3%|▎         | 3/100 [08:26<4:35:03, 170.14s/it]Last batch mean norm: 1.66 0.88 
+ variance norm: 17.13 16.25
+Learned temperature: 0.07024485507965798
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 3/100, Loss: 4.2615
+  4%|▍         | 4/100 [11:25<4:37:28, 173.42s/it]Last batch mean norm: 1.42 0.96 
+ variance norm: 17.00 16.24
+Learned temperature: 0.07029049286923296
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 4/100, Loss: 3.6699
+  5%|▌         | 5/100 [14:27<4:39:54, 176.79s/it]Last batch mean norm: 1.29 0.97 
+ variance norm: 16.83 16.29
+Learned temperature: 0.07034632099976983
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 5/100, Loss: 3.0129
+  6%|▌         | 6/100 [17:21<4:35:25, 175.80s/it]Last batch mean norm: 1.23 1.10 
+ variance norm: 16.77 16.35
+Learned temperature: 0.07041003334380175
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 6/100, Loss: 2.2521
+  7%|▋         | 7/100 [20:11<4:29:19, 173.76s/it]Last batch mean norm: 1.19 1.07 
+ variance norm: 16.80 16.39
+Learned temperature: 0.07047622478599229
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 7/100, Loss: 1.6049
+  8%|▊         | 8/100 [22:43<4:16:04, 167.01s/it]Last batch mean norm: 1.19 1.11 
+ variance norm: 16.73 16.46
+Learned temperature: 0.07054106490787608
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 8/100, Loss: 1.2375
+  9%|▉         | 9/100 [25:25<4:10:53, 165.42s/it]Last batch mean norm: 1.18 1.13 
+ variance norm: 16.74 16.43
+Learned temperature: 0.07060196929195162
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 9/100, Loss: 0.9954
+Last batch mean norm: 1.14 1.12 
+ variance norm: 16.71 16.47
+Learned temperature: 0.07066683631768159
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 10/100, Loss: 0.8716
+ 10%|█         | 10/100 [29:24<4:42:15, 188.18s/it]Recall: image-to-text: 0.36400002241134644, text-to-image: 0.3450000286102295
+Precision: image-to-text: 0.36400002241134644, text-to-image: 0.3450000286102295
+Top-1 Recall: 0.3545; Precision: 0.3545
+ 11%|█         | 11/100 [31:58<4:23:41, 177.77s/it]Last batch mean norm: 1.13 1.13 
+ variance norm: 16.68 16.46
+Learned temperature: 0.07073239520036728
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 11/100, Loss: 0.7668
+ 12%|█▏        | 12/100 [34:41<4:13:45, 173.02s/it]Last batch mean norm: 1.12 1.15 
+ variance norm: 16.68 16.44
+Learned temperature: 0.07079631677884105
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 12/100, Loss: 0.6540
+ 13%|█▎        | 13/100 [37:25<4:07:09, 170.46s/it]Last batch mean norm: 1.12 1.12 
+ variance norm: 16.64 16.45
+Learned temperature: 0.07086361995685776
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 13/100, Loss: 0.5816
+ 14%|█▍        | 14/100 [40:09<4:01:36, 168.57s/it]Last batch mean norm: 1.11 1.16 
+ variance norm: 16.60 16.45
+Learned temperature: 0.07093229396135624
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 14/100, Loss: 0.5269
+ 15%|█▌        | 15/100 [42:55<3:57:32, 167.68s/it]Last batch mean norm: 1.04 1.14 
+ variance norm: 16.62 16.42
+Learned temperature: 0.0710106167568304
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 15/100, Loss: 0.5689
+ 16%|█▌        | 16/100 [45:41<3:53:59, 167.13s/it]Last batch mean norm: 1.06 1.16 
+ variance norm: 16.56 16.47
+Learned temperature: 0.07107956165018714
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 16/100, Loss: 0.4596
+ 17%|█▋        | 17/100 [48:28<3:51:01, 167.00s/it]Last batch mean norm: 1.07 1.17 
+ variance norm: 16.58 16.45
+Learned temperature: 0.07114973643935799
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 17/100, Loss: 0.4041
+ 18%|█▊        | 18/100 [51:13<3:47:35, 166.53s/it]Last batch mean norm: 1.07 1.19 
+ variance norm: 16.56 16.46
+Learned temperature: 0.07122162692910189
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 18/100, Loss: 0.3752
+ 19%|█▉        | 19/100 [53:59<3:44:33, 166.34s/it]Last batch mean norm: 1.12 1.18 
+ variance norm: 16.53 16.40
+Learned temperature: 0.07129913589126707
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 19/100, Loss: 0.3579
+Last batch mean norm: 1.03 1.15 
+ variance norm: 16.49 16.39
+Learned temperature: 0.07137516184174458
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 20/100, Loss: 0.3400
+ 20%|██        | 20/100 [57:59<4:11:14, 188.43s/it]Recall: image-to-text: 0.4150000214576721, text-to-image: 0.4020000100135803
+Precision: image-to-text: 0.4150000214576721, text-to-image: 0.4020000100135803
+Top-1 Recall: 0.4085; Precision: 0.4085
+ 21%|██        | 21/100 [1:00:41<3:57:41, 180.53s/it]Last batch mean norm: 1.04 1.20 
+ variance norm: 16.49 16.41
+Learned temperature: 0.07145317594013059
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 21/100, Loss: 0.3189
+ 22%|██▏       | 22/100 [1:03:24<3:47:57, 175.36s/it]Last batch mean norm: 1.04 1.19 
+ variance norm: 16.48 16.41
+Learned temperature: 0.07154011113737052
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 22/100, Loss: 0.3227
+ 23%|██▎       | 23/100 [1:06:11<3:41:46, 172.81s/it]Last batch mean norm: 1.06 1.21 
+ variance norm: 16.45 16.39
+Learned temperature: 0.07162609367030381
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 23/100, Loss: 0.3014
+ 24%|██▍       | 24/100 [1:08:59<3:36:54, 171.24s/it]Last batch mean norm: 1.03 1.17 
+ variance norm: 16.43 16.38
+Learned temperature: 0.07171352887605928
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 24/100, Loss: 0.2837
+ 25%|██▌       | 25/100 [1:11:49<3:33:39, 170.92s/it]Last batch mean norm: 1.04 1.21 
+ variance norm: 16.46 16.39
+Learned temperature: 0.07179660568060679
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 25/100, Loss: 0.2663
+ 26%|██▌       | 26/100 [1:14:37<3:29:38, 169.98s/it]Last batch mean norm: 0.99 1.17 
+ variance norm: 16.42 16.40
+Learned temperature: 0.07193139319466524
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 26/100, Loss: 0.3603
+ 27%|██▋       | 27/100 [1:17:23<3:25:37, 169.01s/it]Last batch mean norm: 1.01 1.19 
+ variance norm: 16.40 16.37
+Learned temperature: 0.07204189160806802
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 27/100, Loss: 0.3100
+ 28%|██▊       | 28/100 [1:20:11<3:22:15, 168.55s/it]Last batch mean norm: 0.99 1.18 
+ variance norm: 16.40 16.34
+Learned temperature: 0.07215009875968623
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 28/100, Loss: 0.3074
+ 29%|██▉       | 29/100 [1:22:57<3:18:40, 167.90s/it]Last batch mean norm: 1.01 1.18 
+ variance norm: 16.35 16.37
+Learned temperature: 0.07225958253871931
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 29/100, Loss: 0.2733
+Last batch mean norm: 1.02 1.18 
+ variance norm: 16.36 16.36
+Learned temperature: 0.07236954893538547
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 30/100, Loss: 0.2523
+ 30%|███       | 30/100 [1:26:56<3:40:36, 189.10s/it]Recall: image-to-text: 0.4100000262260437, text-to-image: 0.4140000343322754
+Precision: image-to-text: 0.4100000262260437, text-to-image: 0.4140000343322754
+Top-1 Recall: 0.4120; Precision: 0.4120
+ 31%|███       | 31/100 [1:29:35<3:27:08, 180.13s/it]Last batch mean norm: 1.03 1.19 
+ variance norm: 16.37 16.33
+Learned temperature: 0.0725012694581101
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 31/100, Loss: 0.2823
+ 32%|███▏      | 32/100 [1:32:16<3:17:44, 174.48s/it]Last batch mean norm: 0.96 1.21 
+ variance norm: 16.34 16.33
+Learned temperature: 0.07261508084793308
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 32/100, Loss: 0.2315
+ 33%|███▎      | 33/100 [1:34:52<3:08:26, 168.76s/it]Last batch mean norm: 1.00 1.21 
+ variance norm: 16.35 16.32
+Learned temperature: 0.07273090979738853
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 33/100, Loss: 0.2135
+ 34%|███▍      | 34/100 [1:37:17<2:57:59, 161.81s/it]Last batch mean norm: 1.03 1.21 
+ variance norm: 16.29 16.34
+Learned temperature: 0.07285528813237593
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 34/100, Loss: 0.2109
+ 35%|███▌      | 35/100 [1:39:55<2:53:50, 160.47s/it]Last batch mean norm: 0.99 1.18 
+ variance norm: 16.27 16.31
+Learned temperature: 0.07299784927792016
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 35/100, Loss: 0.2071
+ 36%|███▌      | 36/100 [1:42:30<2:49:28, 158.89s/it]Last batch mean norm: 1.00 1.19 
+ variance norm: 16.28 16.30
+Learned temperature: 0.07313887266604686
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 36/100, Loss: 0.2030
+ 37%|███▋      | 37/100 [1:45:05<2:45:46, 157.89s/it]Last batch mean norm: 1.05 1.23 
+ variance norm: 16.27 16.32
+Learned temperature: 0.07326463609189689
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 37/100, Loss: 0.1885
+ 38%|███▊      | 38/100 [1:48:00<2:48:13, 162.80s/it]Last batch mean norm: 1.03 1.23 
+ variance norm: 16.29 16.35
+Learned temperature: 0.07341984600804584
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 38/100, Loss: 0.1852
+ 39%|███▉      | 39/100 [1:50:42<2:45:24, 162.70s/it]Last batch mean norm: 1.02 1.22 
+ variance norm: 16.30 16.29
+Learned temperature: 0.0735780226972976
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 39/100, Loss: 0.1805
+Last batch mean norm: 1.01 1.25 
+ variance norm: 16.30 16.32
+Learned temperature: 0.07372220589538041
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 40/100, Loss: 0.1642
+ 40%|████      | 40/100 [1:54:25<3:00:43, 180.73s/it]Recall: image-to-text: 0.3930000066757202, text-to-image: 0.38600000739097595
+Precision: image-to-text: 0.3930000066757202, text-to-image: 0.38600000739097595
+Top-1 Recall: 0.3895; Precision: 0.3895
+ 41%|████      | 41/100 [1:56:47<2:46:25, 169.25s/it]Last batch mean norm: 1.02 1.25 
+ variance norm: 16.28 16.31
+Learned temperature: 0.07385409952810756
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 41/100, Loss: 0.1600
+ 42%|████▏     | 42/100 [1:59:21<2:39:12, 164.69s/it]Last batch mean norm: 1.01 1.23 
+ variance norm: 16.26 16.32
+Learned temperature: 0.07403177028304068
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 42/100, Loss: 0.1579
+ 43%|████▎     | 43/100 [2:02:03<2:35:25, 163.60s/it]Last batch mean norm: 1.05 1.25 
+ variance norm: 16.27 16.33
+Learned temperature: 0.07417516265006206
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 43/100, Loss: 0.1522
+ 44%|████▍     | 44/100 [2:04:43<2:31:54, 162.75s/it]Last batch mean norm: 1.04 1.24 
+ variance norm: 16.27 16.26
+Learned temperature: 0.07434475713537408
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 44/100, Loss: 0.1467
+ 45%|████▌     | 45/100 [2:07:21<2:27:40, 161.10s/it]Last batch mean norm: 1.06 1.25 
+ variance norm: 16.26 16.29
+Learned temperature: 0.07449400673970931
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 45/100, Loss: 0.1409
+ 46%|████▌     | 46/100 [2:09:58<2:24:01, 160.02s/it]Last batch mean norm: 1.03 1.23 
+ variance norm: 16.25 16.32
+Learned temperature: 0.0746769166629693
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 46/100, Loss: 0.1357
+ 47%|████▋     | 47/100 [2:12:45<2:23:09, 162.07s/it]Last batch mean norm: 1.01 1.24 
+ variance norm: 16.26 16.30
+Learned temperature: 0.07485947642286592
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 47/100, Loss: 0.1322
+ 48%|████▊     | 48/100 [2:15:28<2:20:44, 162.39s/it]Last batch mean norm: 1.04 1.26 
+ variance norm: 16.26 16.30
+Learned temperature: 0.07499334513591299
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 48/100, Loss: 0.1203
+ 49%|████▉     | 49/100 [2:18:12<2:18:30, 162.95s/it]Last batch mean norm: 1.05 1.26 
+ variance norm: 16.26 16.29
+Learned temperature: 0.07510659385233516
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 49/100, Loss: 0.1130
+Last batch mean norm: 1.03 1.26 
+ variance norm: 16.25 16.30
+Learned temperature: 0.0752432221426511
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 50/100, Loss: 0.1081
+ 50%|█████     | 50/100 [2:22:15<2:35:45, 186.90s/it]Recall: image-to-text: 0.4150000214576721, text-to-image: 0.4190000295639038
+Precision: image-to-text: 0.4150000214576721, text-to-image: 0.4190000295639038
+Top-1 Recall: 0.4170; Precision: 0.4170
+ 51%|█████     | 51/100 [2:24:39<2:21:59, 173.88s/it]Last batch mean norm: 1.06 1.26 
+ variance norm: 16.22 16.30
+Learned temperature: 0.07538131843405134
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 51/100, Loss: 0.1087
+ 52%|█████▏    | 52/100 [2:26:55<2:10:00, 162.51s/it]Last batch mean norm: 1.05 1.27 
+ variance norm: 16.26 16.31
+Learned temperature: 0.07554405246274853
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 52/100, Loss: 0.1086
+ 53%|█████▎    | 53/100 [2:29:14<2:01:54, 155.63s/it]Last batch mean norm: 1.06 1.29 
+ variance norm: 16.19 16.30
+Learned temperature: 0.07563086245463468
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 53/100, Loss: 0.0934
+ 54%|█████▍    | 54/100 [2:31:34<1:55:44, 150.98s/it]Last batch mean norm: 1.03 1.28 
+ variance norm: 16.26 16.29
+Learned temperature: 0.07578239561975533
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 54/100, Loss: 0.0953
+ 55%|█████▌    | 55/100 [2:33:52<1:50:17, 147.07s/it]Last batch mean norm: 1.05 1.29 
+ variance norm: 16.23 16.28
+Learned temperature: 0.07590204141786754
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 55/100, Loss: 0.0888
+ 56%|█████▌    | 56/100 [2:36:07<1:45:09, 143.40s/it]Last batch mean norm: 1.09 1.31 
+ variance norm: 16.25 16.32
+Learned temperature: 0.07599221536654871
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 56/100, Loss: 0.0818
+ 57%|█████▋    | 57/100 [2:38:27<1:42:06, 142.48s/it]Last batch mean norm: 1.08 1.29 
+ variance norm: 16.23 16.27
+Learned temperature: 0.07613914714942188
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 57/100, Loss: 0.0862
+ 58%|█████▊    | 58/100 [2:40:49<1:39:30, 142.14s/it]Last batch mean norm: 1.06 1.30 
+ variance norm: 16.26 16.31
+Learned temperature: 0.07624903741204
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 58/100, Loss: 0.0815
+ 59%|█████▉    | 59/100 [2:43:06<1:36:10, 140.74s/it]Last batch mean norm: 1.03 1.31 
+ variance norm: 16.23 16.29
+Learned temperature: 0.07633778737073568
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 59/100, Loss: 0.0765
+Last batch mean norm: 1.06 1.30 
+ variance norm: 16.21 16.26
+Learned temperature: 0.07641358901694575
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 60/100, Loss: 0.0688
+ 60%|██████    | 60/100 [2:46:36<1:47:43, 161.58s/it]Recall: image-to-text: 0.42000001668930054, text-to-image: 0.42100003361701965
+Precision: image-to-text: 0.42000001668930054, text-to-image: 0.42100003361701965
+Top-1 Recall: 0.4205; Precision: 0.4205
+ 61%|██████    | 61/100 [2:48:57<1:40:51, 155.16s/it]Last batch mean norm: 1.05 1.33 
+ variance norm: 16.24 16.30
+Learned temperature: 0.07648124536432156
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 61/100, Loss: 0.0690
+ 62%|██████▏   | 62/100 [2:51:12<1:34:30, 149.22s/it]Last batch mean norm: 1.06 1.32 
+ variance norm: 16.26 16.29
+Learned temperature: 0.07654732281911424
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 62/100, Loss: 0.0645
+ 63%|██████▎   | 63/100 [2:53:30<1:30:00, 145.95s/it]Last batch mean norm: 1.05 1.32 
+ variance norm: 16.24 16.29
+Learned temperature: 0.07661316189595248
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 63/100, Loss: 0.0627
+ 64%|██████▍   | 64/100 [2:55:52<1:26:50, 144.75s/it]Last batch mean norm: 1.06 1.31 
+ variance norm: 16.25 16.25
+Learned temperature: 0.07666383185802404
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 64/100, Loss: 0.0604
+ 65%|██████▌   | 65/100 [2:58:11<1:23:26, 143.03s/it]Last batch mean norm: 1.10 1.32 
+ variance norm: 16.24 16.28
+Learned temperature: 0.07669666360414254
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 65/100, Loss: 0.0537
+ 66%|██████▌   | 66/100 [3:00:32<1:20:37, 142.29s/it]Last batch mean norm: 1.10 1.31 
+ variance norm: 16.24 16.28
+Learned temperature: 0.0767362223823593
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 66/100, Loss: 0.0545
+ 67%|██████▋   | 67/100 [3:02:49<1:17:28, 140.88s/it]Last batch mean norm: 1.08 1.31 
+ variance norm: 16.25 16.28
+Learned temperature: 0.07675075284945339
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 67/100, Loss: 0.0507
+ 68%|██████▊   | 68/100 [3:05:11<1:15:15, 141.10s/it]Last batch mean norm: 1.12 1.36 
+ variance norm: 16.23 16.30
+Learned temperature: 0.07677698002705781
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 68/100, Loss: 0.0479
+ 69%|██████▉   | 69/100 [3:07:32<1:12:56, 141.18s/it]Last batch mean norm: 1.09 1.33 
+ variance norm: 16.24 16.28
+Learned temperature: 0.07681972819142689
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 69/100, Loss: 0.0470
+Last batch mean norm: 1.15 1.35 
+ variance norm: 16.25 16.29
+Learned temperature: 0.07681951433219303
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 70/100, Loss: 0.0400
+ 70%|███████   | 70/100 [3:11:04<1:21:11, 162.39s/it]Recall: image-to-text: 0.4480000138282776, text-to-image: 0.45900002121925354
+Precision: image-to-text: 0.4480000138282776, text-to-image: 0.45900002121925354
+Top-1 Recall: 0.4535; Precision: 0.4535
+ 71%|███████   | 71/100 [3:13:23<1:15:04, 155.34s/it]Last batch mean norm: 1.12 1.36 
+ variance norm: 16.23 16.28
+Learned temperature: 0.07685730147149258
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 71/100, Loss: 0.0436
+ 72%|███████▏  | 72/100 [3:15:38<1:09:33, 149.07s/it]Last batch mean norm: 1.11 1.34 
+ variance norm: 16.24 16.28
+Learned temperature: 0.07687031682203828
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 72/100, Loss: 0.0411
+ 73%|███████▎  | 73/100 [3:17:59<1:06:03, 146.80s/it]Last batch mean norm: 1.11 1.35 
+ variance norm: 16.23 16.30
+Learned temperature: 0.07688807777092505
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 73/100, Loss: 0.0398
+ 74%|███████▍  | 74/100 [3:20:16<1:02:18, 143.79s/it]Last batch mean norm: 1.13 1.35 
+ variance norm: 16.24 16.29
+Learned temperature: 0.07690642790656807
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 74/100, Loss: 0.0380
+ 75%|███████▌  | 75/100 [3:22:36<59:26, 142.67s/it]  Last batch mean norm: 1.09 1.35 
+ variance norm: 16.22 16.29
+Learned temperature: 0.07691802108860783
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 75/100, Loss: 0.0367
+ 76%|███████▌  | 76/100 [3:24:58<57:01, 142.57s/it]Last batch mean norm: 1.09 1.35 
+ variance norm: 16.24 16.29
+Learned temperature: 0.07693256404877927
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 76/100, Loss: 0.0356
+ 77%|███████▋  | 77/100 [3:27:15<53:58, 140.83s/it]Last batch mean norm: 1.10 1.35 
+ variance norm: 16.23 16.28
+Learned temperature: 0.07692333650394434
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 77/100, Loss: 0.0331
+ 78%|███████▊  | 78/100 [3:29:29<50:54, 138.85s/it]Last batch mean norm: 1.11 1.36 
+ variance norm: 16.24 16.27
+Learned temperature: 0.07691425785761383
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 78/100, Loss: 0.0318
+ 79%|███████▉  | 79/100 [3:31:47<48:31, 138.65s/it]Last batch mean norm: 1.13 1.36 
+ variance norm: 16.23 16.27
+Learned temperature: 0.07689744347915875
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 79/100, Loss: 0.0281
+Last batch mean norm: 1.14 1.36 
+ variance norm: 16.23 16.26
+Learned temperature: 0.07688220915518992
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 80/100, Loss: 0.0279
+ 80%|████████  | 80/100 [3:35:18<53:23, 160.19s/it]Recall: image-to-text: 0.4820000231266022, text-to-image: 0.4880000352859497
+Precision: image-to-text: 0.4820000231266022, text-to-image: 0.4880000352859497
+Top-1 Recall: 0.4850; Precision: 0.4850
+ 81%|████████  | 81/100 [3:37:32<48:15, 152.41s/it]Last batch mean norm: 1.11 1.38 
+ variance norm: 16.21 16.28
+Learned temperature: 0.07688796501290208
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 81/100, Loss: 0.0300
+ 82%|████████▏ | 82/100 [3:39:50<44:24, 148.02s/it]Last batch mean norm: 1.13 1.35 
+ variance norm: 16.23 16.29
+Learned temperature: 0.0768736361600278
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 82/100, Loss: 0.0255
+ 83%|████████▎ | 83/100 [3:42:10<41:13, 145.52s/it]Last batch mean norm: 1.15 1.38 
+ variance norm: 16.24 16.28
+Learned temperature: 0.0768542989882427
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 83/100, Loss: 0.0249
+ 84%|████████▍ | 84/100 [3:44:30<38:25, 144.08s/it]Last batch mean norm: 1.14 1.38 
+ variance norm: 16.22 16.28
+Learned temperature: 0.07684750061085122
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 84/100, Loss: 0.0238
+ 85%|████████▌ | 85/100 [3:46:47<35:27, 141.85s/it]Last batch mean norm: 1.12 1.36 
+ variance norm: 16.21 16.28
+Learned temperature: 0.07685125731197524
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 85/100, Loss: 0.0255
+ 86%|████████▌ | 86/100 [3:49:02<32:38, 139.91s/it]Last batch mean norm: 1.14 1.37 
+ variance norm: 16.23 16.28
+Learned temperature: 0.07684026985431379
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 86/100, Loss: 0.0219
+ 87%|████████▋ | 87/100 [3:51:19<30:05, 138.91s/it]Last batch mean norm: 1.14 1.38 
+ variance norm: 16.23 16.27
+Learned temperature: 0.07683528120041058
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 87/100, Loss: 0.0225
+ 88%|████████▊ | 88/100 [3:53:41<27:57, 139.81s/it]Last batch mean norm: 1.14 1.37 
+ variance norm: 16.23 16.27
+Learned temperature: 0.07683885652429658
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 88/100, Loss: 0.0230
+ 89%|████████▉ | 89/100 [3:56:00<25:34, 139.49s/it]Last batch mean norm: 1.14 1.37 
+ variance norm: 16.23 16.30
+Learned temperature: 0.07683555707969839
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 89/100, Loss: 0.0204
+Last batch mean norm: 1.17 1.38 
+ variance norm: 16.24 16.29
+Learned temperature: 0.07682681998776868
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 90/100, Loss: 0.0181
+ 90%|█████████ | 90/100 [3:59:25<26:33, 159.36s/it]Recall: image-to-text: 0.49400001764297485, text-to-image: 0.49800002574920654
+Precision: image-to-text: 0.49400001764297485, text-to-image: 0.49800002574920654
+Top-1 Recall: 0.4960; Precision: 0.4960
+ 91%|█████████ | 91/100 [4:01:47<23:06, 154.00s/it]Last batch mean norm: 1.16 1.40 
+ variance norm: 16.21 16.27
+Learned temperature: 0.07682115770214937
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 91/100, Loss: 0.0205
+ 92%|█████████▏| 92/100 [4:04:06<19:56, 149.62s/it]Last batch mean norm: 1.14 1.37 
+ variance norm: 16.22 16.27
+Learned temperature: 0.07681412322172809
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 92/100, Loss: 0.0185
+ 93%|█████████▎| 93/100 [4:06:27<17:08, 146.88s/it]Last batch mean norm: 1.17 1.38 
+ variance norm: 16.22 16.27
+Learned temperature: 0.07681057833184497
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 93/100, Loss: 0.0185
+ 94%|█████████▍| 94/100 [4:08:41<14:19, 143.20s/it]Last batch mean norm: 1.14 1.37 
+ variance norm: 16.22 16.30
+Learned temperature: 0.07680797332769994
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 94/100, Loss: 0.0181
+ 95%|█████████▌| 95/100 [4:11:01<11:50, 142.11s/it]Last batch mean norm: 1.17 1.40 
+ variance norm: 16.23 16.28
+Learned temperature: 0.07680590857953941
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 95/100, Loss: 0.0192
+ 96%|█████████▌| 96/100 [4:13:22<09:27, 141.77s/it]Last batch mean norm: 1.17 1.37 
+ variance norm: 16.22 16.29
+Learned temperature: 0.07680435024640067
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 96/100, Loss: 0.0177
+ 97%|█████████▋| 97/100 [4:15:41<07:02, 140.86s/it]Last batch mean norm: 1.18 1.38 
+ variance norm: 16.23 16.30
+Learned temperature: 0.07680378206124067
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 97/100, Loss: 0.0191
+ 98%|█████████▊| 98/100 [4:18:02<04:42, 141.17s/it]Last batch mean norm: 1.17 1.38 
+ variance norm: 16.22 16.27
+Learned temperature: 0.07680379893790645
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 98/100, Loss: 0.0176
+ 99%|█████████▉| 99/100 [4:20:21<02:20, 140.44s/it]Last batch mean norm: 1.17 1.38 
+ variance norm: 16.24 16.30
+Learned temperature: 0.07680379893790645
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 99/100, Loss: 0.0190
+Last batch mean norm: 1.17 1.38 
+ variance norm: 16.23 16.29
+Learned temperature: 0.07680379893790645
+Learned mean weight: 1.0,
+ var weighr: 1.0
+Epoch 100/100, Loss: 0.0173
+100%|██████████| 100/100 [4:23:50<00:00, 160.91s/it]100%|██████████| 100/100 [4:23:50<00:00, 158.30s/it]
+Recall: image-to-text: 0.5010000467300415, text-to-image: 0.5160000324249268
+Precision: image-to-text: 0.5010000467300415, text-to-image: 0.5160000324249268
+Top-1 Recall: 0.5085; Precision: 0.5085

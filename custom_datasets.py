@@ -6,13 +6,14 @@ from torchvision import models,datasets
 from transformers import AutoModel, AutoTokenizer
 from torch.utils.data import DataLoader
 from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
+from pycocotools.coco import COCO
 
 class CIFAR10Text(datasets.CIFAR10):
-    def __init__(self, root, tokenizer_name='bert-base-uncased',train=True,transform=None):
+    def __init__(self, root, TOKENIZER_NAME='bert-base-uncased',train=True,transform=None):
         super().__init__(root, train=train, download=True,transform=transform)
         self.classes = ['airplane', 'car', 'bird', 'cat', 'deer',
                        'dog', 'frog', 'horse', 'ship', 'truck']
-        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_NAME)
 
     def __getitem__(self, idx):
         img, label = super().__getitem__(idx)
@@ -22,26 +23,24 @@ class CIFAR10Text(datasets.CIFAR10):
         return img, tokens, label
 
 class LoadFlickr30K():
-    def __init__(self,tokenizer_name='bert-base-uncased',BATCH_SIZE=64):
+    def __init__(self,TOKENIZER_NAME='bert-base-uncased',BATCH_SIZE=64,IMAGE_SIZE=224,MEAN=[0.485, 0.456, 0.406],STD=[0.229, 0.224, 0.225]):
         self.n_workers=os.cpu_count()
         self.BATCH_SIZE=BATCH_SIZE
         flickr30k_dataset= load_dataset('nlphuji/flickr30k', cache_dir='./data',split='test')
 
         self.transform = Compose([
-            Resize(256),
-            CenterCrop(224),
+            Resize(IMAGE_SIZE),
             ToTensor(),
-            Normalize(mean=[0.485, 0.456, 0.406],
-                     std=[0.229, 0.224, 0.225])
+            Normalize(mean=MEAN,std=STD)
         ])
 
-        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_NAME)
         
         self.dataset = flickr30k_dataset.map(
             self.process_examples,
             batched=True,
-            batch_size=64,
-            #num_proc=self.n_workers,
+            batch_size=self.BATCH_SIZE,
+            num_proc=self.n_workers,
             remove_columns=['img_id', 'filename', 'sentids']
         )
     def process_examples(self,examples):
@@ -54,7 +53,7 @@ class LoadFlickr30K():
             captions,
             padding='max_length',
             truncation=True,
-            max_length=76,
+            max_length=self.tokenizer.model_max_length,
             return_tensors='pt'
         )
 
@@ -88,14 +87,12 @@ class LoadFlickr30K():
     def get_loaders(self):
         loaders=[]
         for split in ['train','val','test']:
-            if split=='train':
-                batch_size=self.BATCH_SIZE
-            else:
-                batch_size=1000
             loaders.append(
             DataLoader(
-            self.dataset.filter(lambda x: x["split"] == split,num_proc=self.n_workers),
-            batch_size=batch_size,
+            self.dataset.filter(lambda x: x["split"] == split,
+                num_proc=self.n_workers
+            ),
+            batch_size=self.BATCH_SIZE,
             shuffle=True,
             collate_fn=self.collate_fn,
             num_workers=self.n_workers,

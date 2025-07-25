@@ -1,0 +1,51 @@
+Batch size: train=128, val=1000, test=1000
+Using metric: hell
+Training:   0%|          | 0/50 [00:00<?, ?it/s]Training:   0%|          | 0/50 [00:47<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/fxu/ContrastiveLearningWithW2Dist/prototype2.py", line 261, in <module>
+    fire.Fire(train)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+  File "/home/fxu/my-env/lib/python3.10/site-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "/home/fxu/ContrastiveLearningWithW2Dist/prototype2.py", line 207, in train
+    t_mean, t_var = text_encoder(input_ids, attention_mask)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fxu/ContrastiveLearningWithW2Dist/encoders.py", line 70, in forward
+    outputs = self.model(input_ids=input_ids,
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 482, in forward
+    encoder_outputs = self.encoder(
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 334, in forward
+    layer_outputs = layer_module(
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 293, in forward
+    self_attention_outputs = self.attention(
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 234, in forward
+    self_outputs = self.attn(
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fxu/my-env/lib/python3.10/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 190, in forward
+    c = c.permute(0, 2, 1, 3).contiguous()
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacity of 47.41 GiB of which 2.38 MiB is free. Process 968961 has 33.89 GiB memory in use. Including non-PyTorch memory, this process has 13.48 GiB memory in use. Of the allocated memory 13.00 GiB is allocated by PyTorch, and 172.71 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

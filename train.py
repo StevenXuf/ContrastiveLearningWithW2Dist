@@ -1,164 +1,264 @@
 import torch
 import numpy as np
-import argparse, yaml
+import yaml
 import torch.nn as nn
 import torch.optim as optim
+import fire
+import os
+from pathlib import Path
 
 from tqdm import tqdm
 from torch.optim.lr_scheduler import CosineAnnealingLR
-from torchvision import transforms,datasets
+from torchvision import transforms, datasets
 from torchmetrics.retrieval import RetrievalRecall, RetrievalPrecision
 
 from custom_datasets import LoadFlickr30K
-from encoders import ResNetEncoder,BertEncoder,ViTEncoder,SentenceBertEncoder
-from loss_func import W2ContrastiveLoss,wasserstein2_distance
+from encoders import ResNetEncoder, BertEncoder, ViTEncoder, SentenceBertEncoder
+from loss_func import DistanceBasedContrastiveLoss, get_distance
 
-def evaluate(dataloader,vision_encoder,text_encoder,device, top_k=1):
+def evaluate(dataloader, vision_encoder, text_encoder, metric, device, top_k=1):
     vision_encoder.eval()
     text_encoder.eval()
-    correct = 0
-    total = 0
     
     recall = RetrievalRecall(top_k=top_k)
     precision = RetrievalPrecision(top_k=top_k)
     
-    v_mean_all=[]
-    t_mean_all=[]
-    v_var_all=[]
-    t_var_all=[]
+    v_mean_all = []
+    t_mean_all = []
+    v_var_all = []
+    t_var_all = []
     with torch.no_grad():
         for batch in dataloader:
             imgs = batch['images'].to(device)
             input_ids = batch['input_ids'].squeeze(1).to(device)
             attention_mask = batch['attention_masks'].squeeze(1).to(device)
 
-            v_mean, v_var= vision_encoder(imgs)
-            t_mean, t_var= text_encoder(input_ids, attention_mask)
+            v_mean, v_var = vision_encoder(imgs)
+            t_mean, t_var = text_encoder(input_ids, attention_mask)
             
             v_mean_all.append(v_mean)
             t_mean_all.append(t_mean)
             v_var_all.append(v_var)
             t_var_all.append(t_var)
         
-        v_mean=torch.cat(v_mean_all)
-        t_mean=torch.cat(t_mean_all)
-        v_var=torch.cat(v_var_all)
-        t_var=torch.cat(t_var_all)
+        v_mean = torch.cat(v_mean_all)
+        t_mean = torch.cat(t_mean_all)
+        v_var = torch.cat(v_var_all)
+        t_var = torch.cat(t_var_all)
 
-        preds = -wasserstein2_distance(
-            v_mean.unsqueeze(1), v_var.unsqueeze(1).sqrt(),
-            t_mean.unsqueeze(0), t_var.unsqueeze(0).sqrt()
-        )
-        targets=torch.eye(preds.size(0), dtype=torch.int).to(device)
-        indexes=torch.arange(preds.size(0), dtype=torch.long).unsqueeze(1).expand(*preds.size()).to(device)
+        preds = get_distance(v_mean, v_var, t_mean, t_var, metric)
 
-        r_val=recall(preds,targets,indexes)
-        p_val=precision(preds,targets,indexes)
+        targets = torch.eye(preds.size(0), dtype=torch.int).to(device)
+        indexes = torch.arange(preds.size(0), dtype=torch.long).unsqueeze(1).expand(*preds.size()).to(device)
+       
+        i2t_r = recall(preds, targets, indexes)
+        t2i_r = recall(preds.T, targets, indexes)
+        r_val = (i2t_r + t2i_r) / 2
+        print(f'Recall: image-to-text: {i2t_r}, text-to-image: {t2i_r}')
 
-    return r_val,p_val
+        i2t_p = precision(preds, targets, indexes)
+        t2i_p = precision(preds.T, targets, indexes)
+        p_val = (i2t_p + t2i_p) / 2
+        print(f'Precision: image-to-text: {i2t_p}, text-to-image: {t2i_p}')
+
+    return r_val, p_val
 
 def get_default_config(config_path):
-    with open(config_path,'r') as f:
+    with open(config_path, 'r') as f:
         return yaml.safe_load(f)
 
-def get_config():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--config", type=str, default="config.yaml")
-    parser.add_argument("--tokenizer_name",type=str)
-    parser.add_argument("--batch_size", type=int, help="override batch size")
-    parser.add_argument("--lr",type=float, help="override learning rate")
-    parser.add_argument('--embed_dim',type=int,help='new embed dim')
-    parser.add_argument('--init_temp',type=float,help='new temperature')
-    parser.add_argument('--epochs',type=int,help='new epochs')
-    args = parser.parse_args()
+def save_checkpoint(state, output_dir, epoch, vision_name, text_name, metric, batch_size):
+    """Saves training checkpoint"""
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    filename = f"checkpoint-{vision_name}-{text_name}-{metric}-e{epoch}-b{batch_size}.pth"
+    filepath = os.path.join(output_dir, filename)
+    torch.save(state, filepath)
+    print(f"Checkpoint saved to {filepath}")
+    return filepath
 
-    cfg = get_default_config(args.config)
-
-    if args.tokenizer_name:
-        cfg['tokenizer_name']=args.tokenizer_name
-    if args.batch_size:  
-        cfg["batch_size"] = args.batch_size
-    if args.lr:
-        cfg["lr"] = args.lr
-    if args.embed_dim:
-        cfg['embed_dim']=agrs.embed_dim
-    if args.init_temp:
-        cfg['init_temp']=args.init_temp
-    if args.epochs:
-        cfg['epochs']=args.epochs
+def load_checkpoint(checkpoint_path, vision_encoder, text_encoder, contrastive_loss, optimizer, scheduler, scaler):
+    """Loads training checkpoint"""
+    if not os.path.exists(checkpoint_path):
+        raise FileNotFoundError(f"Checkpoint file not found: {checkpoint_path}")
     
-    return cfg
-
-cfg=get_config()
-
-train_loader,val_loader,test_loader=LoadFlickr30K(tokenizer_name=cfg['tokenizer_name'],BATCH_SIZE=cfg['batch_size']).get_loaders()
-print(f'Batch size: train={train_loader.batch_size}, val={val_loader.batch_size}, test={test_loader.batch_size}')
-
-
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-vision_encoder = ViTEncoder(cfg['embed_dim']).to(device)
-text_encoder = SentenceBertEncoder(cfg['embed_dim']).to(device)
-contrastive_loss=W2ContrastiveLoss(cfg['init_temp']).to(device)
-
-'''
-optimizer = optim.AdamW(
-    [
-        {'params': vision_encoder.mean.parameters()},
-        {'params': vision_encoder.logvar.parameters()},
-        {'params': text_encoder.mean.parameters()},
-        {'params': text_encoder.logvar.parameters()}
-    ],
-    lr=cfg['lr'],
-    #weight_decay=1e-4)
-'''
-optimizer=optim.AdamW(
-list(vision_encoder.parameters())+list(text_encoder.parameters())+list(contrastive_loss.parameters()),
-lr=cfg['lr']
-)
-
-
-scaler = torch.amp.GradScaler()
-scheduler = CosineAnnealingLR(optimizer, T_max=cfg['epochs']*len(train_loader))
-
-for epoch in tqdm(range(cfg['epochs'])):
-    vision_encoder.train()
-    text_encoder.train()
-    total_loss = 0
+    checkpoint = torch.load(checkpoint_path)
     
-    for batch in train_loader:
-        imgs = batch['images'].to(device)
-        input_ids = batch['input_ids'].squeeze(1).to(device)
-        attention_mask = batch['attention_masks'].squeeze(1).to(device)
-        with torch.amp.autocast('cuda'):
-            # Forward pass
-            v_mean, v_var= vision_encoder(imgs)
-            t_mean, t_var= text_encoder(input_ids, attention_mask)
+    vision_encoder.load_state_dict(checkpoint['vision_model'])
+    text_encoder.load_state_dict(checkpoint['language_model'])
+    contrastive_loss.load_state_dict(checkpoint['temperature'])
+    
+    optimizer.load_state_dict(checkpoint['optimizer'])
+    scheduler.load_state_dict(checkpoint['scheduler'])
+    scaler.load_state_dict(checkpoint['scaler'])
+    
+    epoch = checkpoint.get('epoch', 0)
+    print(f"Loaded checkpoint from epoch {epoch}")
+    
+    return epoch,vision_encoder,text_encoder,contrastive_loss,optimizer,scheduler,scaler
 
-            # Compute loss
-            loss = contrastive_loss(v_mean, v_var, t_mean, t_var,reg_weight=cfg['reg_weight'])
+def train(
+    config: str = "config.yaml",
+    tokenizer_name: str = None,
+    batch_size: int = None,
+    lr: float = None,
+    embed_dim: int = None,
+    init_temp: float = None,
+    epochs: int = None,
+    metric: str = None,
+    reg_weight: float = None,
+    output_dir: str = "./checkpoints",
+    resume_ckpt_path: str = None,
+    checkpoint_interval: int = 10
+):
+    """Train vision-text retrieval model with checkpoint support
+    
+    Args:
+        config: Path to YAML configuration file
+        tokenizer_name: Override tokenizer name in config
+        batch_size: Override batch size in config
+        lr: Override learning rate in config
+        embed_dim: Override embedding dimension in config
+        init_temp: Override initial temperature in config
+        epochs: Override number of epochs in config
+        metric: Override distance metric in config
+        reg_weight: Override regularization weight in config
+        output_dir: Directory to save checkpoints
+        resume: Path to checkpoint to resume training
+        checkpoint_interval: Save checkpoint every N epochs
+    """
+    cfg = get_default_config(config)
+    
+    # Apply command-line overrides
+    if tokenizer_name is None:
+        tokenizer_name=cfg['TOKENIZER_NAME']
+    if batch_size is None:
+        batch_size=cfg['BATCH_SIZE']
+    if lr is None:
+        lr=cfg['LR'] = lr
+    if embed_dim is None:
+        embed_dim=cfg['EMBED_DIM'] 
+    if init_temp is None:
+        init_temp=cfg['INIT_TEMP'] 
+    if epochs is None:
+        epochs=cfg['EPOCHS'] 
+    if metric is None:
+        metric=cfg['METRIC'] 
+    if reg_weight is None:
+        reg_weight=cfg['REG_WEIGHT'] 
+
+    # Data loading
+    train_loader, val_loader, test_loader = LoadFlickr30K(
+        TOKENIZER_NAME=tokenizer_name,
+        BATCH_SIZE=batch_size
+    ).get_loaders()
+    
+    print(f'Batch size: train={train_loader.batch_size}, val={val_loader.batch_size}, test={test_loader.batch_size}')
+    print(f"Using metric: {metric}")
+
+    # Device setup
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    
+    # Model initialization
+    vision_encoder = ViTEncoder(embed_dim).to(device)
+    text_encoder = SentenceBertEncoder(embed_dim).to(device)
+    contrastive_loss = DistanceBasedContrastiveLoss(
+        init_temp=init_temp,
+        metric=metric
+    ).to(device)
+
+    # Optimizer setup
+    optimizer = optim.AdamW(
+        list(vision_encoder.parameters()) + 
+        list(text_encoder.parameters()) + 
+        list(contrastive_loss.parameters()),
+        lr=lr
+    )
+
+    # Training utilities
+    scaler = torch.amp.GradScaler()
+    scheduler = CosineAnnealingLR(optimizer, T_max=epochs* len(train_loader))
+    
+    # Resume from checkpoint if specified
+    start_epoch = 0
+    if resume_ckpt_path:
+        start_epoch,vision_encoder,text_encoder,contrastive_loss,optimizer,scheduler,scaler = load_checkpoint(
+            resume_ckpt_path,
+            vision_encoder,
+            text_encoder,
+            contrastive_loss,
+            optimizer,
+            scheduler,
+            scaler
+        )
+
+    # Training loop
+    for epoch in tqdm(range(start_epoch, epochs), desc="Training"):
+        vision_encoder.train()
+        text_encoder.train()
+        total_loss = 0
         
-        # Backward pass
-        scaler.scale(loss).backward()
-        scaler.step(optimizer)
-        scaler.update()
-        optimizer.zero_grad()
+        for batch in train_loader:
+            imgs = batch['images'].to(device)
+            input_ids = batch['input_ids'].squeeze(1).to(device)
+            attention_mask = batch['attention_masks'].squeeze(1).to(device)
+            
+            with torch.amp.autocast('cuda'):
+                v_mean, v_var = vision_encoder(imgs)
+                t_mean, t_var = text_encoder(input_ids, attention_mask)
+                loss = contrastive_loss(
+                    v_mean, v_var, t_mean, t_var,
+                    reg_weight=reg_weight
+                )
+            
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            optimizer.zero_grad()
+            scheduler.step()
+
+            current_lr = scheduler.get_last_lr()[0]
+            #print(f"Current LR = {current_lr}")
+
+            total_loss += loss.item()
         
-        scheduler.step()
+        # Training diagnostics
+        print(f'[Epoch {epoch+1}/{epochs}] Loss: {total_loss/len(train_loader):.4f}')
+        print(f'Mean norms: Vision={v_mean.norm(dim=-1).mean().item():.2f} | Text={t_mean.norm(dim=-1).mean().item():.2f}')
+        print(f'Var norms: Vision={v_var.norm(dim=-1).mean().item():.2f} | Text={t_var.norm(dim=-1).mean().item():.2f}')
+        print(f'Temperature: {1/contrastive_loss.log_temp.exp().item():.4f}')
+        print(f'Weights: Mean={contrastive_loss.mean_weight.item():.4f} | Var={contrastive_loss.var_weight.item():.4f}')
+        
+        # Periodic evaluation and checkpointing
+        if (epoch + 1) % checkpoint_interval == 0 or epoch == cfg['epochs'] - 1:
+            recall, precision = evaluate(
+                test_loader, vision_encoder, text_encoder,
+                cfg['metric'], device, top_k=1
+            )
+            print(f"Top-1 Metrics: Recall={recall:.4f} | Precision={precision:.4f}")
 
-        total_loss += loss.item()
-    
-    print(f'Last batch mean norm: {v_mean.norm(dim=-1).mean(dim=-1).item():.2f} {t_mean.norm(dim=-1).mean(dim=-1).item():.2f} \n variance norm: {v_var.norm(dim=-1).mean(dim=-1).item():.2f} {t_var.norm(dim=-1).mean(dim=-1).item():.2f}')
-    print(f'Learned temperature: {1/contrastive_loss.log_temp.exp().item()}')
-    print(f"Epoch {epoch+1}/{cfg['epochs']}, Loss: {total_loss/len(train_loader):.4f}")
-    
-    if (epoch+1)%10==0:
-        recall,precision=evaluate(test_loader,vision_encoder,text_encoder,device, top_k=1)
-        print(f"Top-1 Recall: {recall:.4f}; Precision: {precision:.4f}")
+            # Save checkpoint
+            checkpoint = {
+                'epoch': epoch + 1,
+                'vision_model': vision_encoder.state_dict(),
+                'language_model': text_encoder.state_dict(),
+                'temperature': contrastive_loss.state_dict(),
+                'optimizer': optimizer.state_dict(),
+                'scheduler': scheduler.state_dict(),
+                'scaler': scaler.state_dict(),
+                'config': cfg
+            }
+            
+            save_checkpoint(
+                checkpoint,
+                output_dir,
+                epoch + 1,
+                vision_encoder.__class__.__name__,
+                text_encoder.__class__.__name__,
+                metric,
+                batch_size
+            )
 
-torch.save({
-    'model': model.state_dict(),
-    'optimizer': optimizer.state_dict(),
-    'scheduler': scheduler.state_dict(),
-    'scaler': scaler.state_dict()
-}, f"./checkpoints/checkpoint-{vision_encoder.__class__.__name__}-{text_encoder.__class__.__name__}-{cfg['epochs']}-b{cfg['batch_size']}.pth")
+    print('Training DONE.')
+
+if __name__ == '__main__':
+    fire.Fire(train)
